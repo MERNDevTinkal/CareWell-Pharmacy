@@ -1,0 +1,16 @@
+{
+  "name": "carewell-pharmacy",
+  "version": "1.0.0",
+  "description": "CareWell Pharmacy - Full-Stack MERN E-commerce Platform",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run storefront\" \"npm run admin\"",
+    "server": "npm --prefix server run dev",
+    "storefront": "npm --prefix storefront run dev",
+    "admin": "npm --prefix admin run dev",
+    "seed": "npm --prefix server run seed",
+    "install:all": "npm install && cd server && npm install && cd ../storefront && npm install && cd ../admin && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

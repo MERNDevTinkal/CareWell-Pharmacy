@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans text-navy-900 bg-gray-50 antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-xl font-semibold transition-all duration-200 inline-flex items-center gap-2 text-xs shadow-sm shadow-primary-500/20 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply bg-navy-900 hover:bg-navy-800 text-white px-4 py-2 rounded-xl font-semibold transition-all duration-200 inline-flex items-center gap-2 text-xs disabled:opacity-50;
+  }
+  .btn-outline {
+    @apply border border-gray-200 text-navy-700 hover:bg-gray-50 px-4 py-2 rounded-xl font-semibold transition-all duration-200 inline-flex items-center gap-2 text-xs disabled:opacity-50;
+  }
+  .btn-danger {
+    @apply bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-xl font-semibold transition-all duration-200 inline-flex items-center gap-2 text-xs disabled:opacity-50;
+  }
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden;
+  }
+  .input {
+    @apply w-full px-3.5 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-xs text-navy-900 placeholder-gray-400 bg-white transition-all;
+  }
+  .label {
+    @apply block text-xs font-bold text-navy-800 mb-1.5 uppercase tracking-wide;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold;
+  }
+}

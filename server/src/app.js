@@ -42,18 +42,20 @@ app.use(helmet({
 
 // CORS
 const allowedOrigins = [
-  process.env.CLIENT_URL || 'http://localhost:5173',
-  process.env.ADMIN_URL || 'http://localhost:5174',
+  process.env.CLIENT_URL,
+  process.env.ADMIN_URL,
+  'https://care-well-pharmacy.vercel.app',
+  'https://admin-care-well-pharmacy.vercel.app',
   'http://localhost:5173',
   'http://localhost:5174'
-];
+].filter(Boolean);
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
       callback(null, true);
     } else {
-      callback(null, true); // Allow dev origins dynamically
+      callback(null, true);
     }
   },
   credentials: true,
@@ -80,6 +82,18 @@ if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 app.use('/uploads', express.static(uploadsDir));
+
+const connectDB = require('./config/db');
+
+// Ensure DB connected on serverless
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Database connection failed' });
+  }
+});
 
 // Health check
 app.get('/api/v1/health', (req, res) => {
